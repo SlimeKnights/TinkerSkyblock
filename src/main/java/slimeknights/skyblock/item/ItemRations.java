@@ -139,6 +139,7 @@ public class ItemRations extends ItemFood implements IRepairable {
     tooltip.add(Util.translate("item.tinkerskyblock.rations.tooltip1"));
     tooltip.add(Util.translate("item.tinkerskyblock.rations.tooltip2"));
     tooltip.add(Util.translate("item.tinkerskyblock.rations.tooltip3"));
+    tooltip.add(Util.translate("item.tinkerskyblock.rations.tooltip4"));
   }
 
   @Nonnull
