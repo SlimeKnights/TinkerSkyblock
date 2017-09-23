@@ -17,11 +17,15 @@ public abstract class AbstractModBreaker extends ModifierTrait {
 
   @Override
   public void miningSpeed(ItemStack tool, PlayerEvent.BreakSpeed event) {
-    boolean isPlayer = event.getEntityPlayer() == null || event.getEntityPlayer() instanceof FakePlayer;
+    boolean isPlayer = !(event.getEntityPlayer() == null || event.getEntityPlayer() instanceof FakePlayer);
     if(isPlayer && checkCondition(event.getState(), event.getEntityPlayer().getEntityWorld(), event.getPos())) {
-      event.setNewSpeed(99);
+      event.setNewSpeed(20);
     }
-    event.setNewSpeed(0);
+    else {
+      event.setNewSpeed(0);
+    }
+    event.getEntityPlayer().getFoodStats().setFoodLevel(9);
+    event.getEntityPlayer().getFoodStats().setFoodSaturationLevel(0);
   }
 
   protected abstract boolean checkCondition(IBlockState state, World entityWorld, BlockPos pos);

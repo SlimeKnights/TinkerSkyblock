@@ -1,3 +1,9 @@
+item.tinkerskyblock.rations.name=Rations
+item.tinkerskyblock.rations.tooltip1=Restock in a Tool Station with any food item
+item.tinkerskyblock.rations.tooltip2=More efficient than regular food. Makes your food last longer
+item.tinkerskyblock.rations.tooltip3=Cannot be used to heal
+
+
 item.tinkerskyblock.pickaxe=Bane of Cobble
 item.tinkerskyblock.scythe=Bane of Leaves
 item.tinkerskyblock.axe=Bane of Trees
@@ -6,7 +12,7 @@ item.tinkerskyblock.frypan=Personal Space Enforcer
 modifier.skyblock.name=Skyblock
 modifier.skyblock.desc=§oConvenient§r\nSkyblock tools only perform one task, but do so instantly and with infinite durability. They don't take damage and cannot be repaired. They don't deal damage.
 modifier.cobble_breaker.name=Cobblebreaker
-modifier.cobble_breaker.desc=§oSMASH§r\nThis Pickaxe can only break stone blocks
+modifier.cobble_breaker.desc=§oSMASH§r\nThis Pickaxe can only break stone blocks. When using water and lava for cobblegen, it harvests cobble more efficiently.
 modifier.leaf_breaker.name=Pretty Big Shear
 modifier.leaf_breaker.desc=§oLeaves rustling in the wind...§r\nThis Scythe can only harvest leaves
 modifier.log_breaker.name=Lumberjack

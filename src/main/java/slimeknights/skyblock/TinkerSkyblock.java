@@ -1,15 +1,24 @@
 package slimeknights.skyblock;
 
+import net.minecraft.client.renderer.block.model.ModelResourceLocation;
+import net.minecraft.item.Item;
+import net.minecraftforge.client.event.ModelRegistryEvent;
+import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.io.File;
 
 import slimeknights.mantle.network.NetworkWrapper;
 import slimeknights.skyblock.config.Config;
 import slimeknights.skyblock.config.ConfigSyncPacket;
+import slimeknights.skyblock.item.ItemRations;
 import slimeknights.skyblock.modifiers.ModCobbleBreaker;
 import slimeknights.skyblock.modifiers.ModLeafBreaker;
 import slimeknights.skyblock.modifiers.ModLogBreaker;
@@ -34,6 +43,7 @@ import static slimeknights.tconstruct.library.utils.HarvestLevels.STONE;
                    + "required-after:tconstruct@[1.12-2.7.3.+,)",
     acceptedMinecraftVersions = "[1.12, 1.13)"
 )
+@Mod.EventBusSubscriber
 public class TinkerSkyblock {
 
   public static final String MODID = "tinkerskyblock";
@@ -50,6 +60,8 @@ public class TinkerSkyblock {
   public static final ModCobbleBreaker MOD_COBBLE_BREAKER = new ModCobbleBreaker();
   public static final ModLeafBreaker MOD_LEAF_BREAKER = new ModLeafBreaker();
   public static final ModLogBreaker MOD_LOG_BREAKER = new ModLogBreaker();
+
+  public static final ItemRations itemRations = new ItemRations();
 
   @EventHandler
   public void preInit(FMLPreInitializationEvent event) {
@@ -74,6 +86,20 @@ public class TinkerSkyblock {
     networkWrapper.registerPacketClient(ConfigSyncPacket.class);
 
     Config.INSTANCE.save();
+  }
+
+  @SubscribeEvent
+  public static void registerItems(RegistryEvent.Register<Item> event) {
+    itemRations.setRegistryName(MODID, "rations");
+    itemRations.setUnlocalizedName(MODID + ".rations");
+    event.getRegistry().register(itemRations);
+  }
+
+
+  @SideOnly(Side.CLIENT)
+  @SubscribeEvent
+  public static void registerModels(ModelRegistryEvent modelRegistryEvent) {
+    ModelLoader.setCustomModelResourceLocation(itemRations, 0, new ModelResourceLocation(itemRations.getRegistryName(), "inventory"));
   }
 
   @EventHandler
