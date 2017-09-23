@@ -38,7 +38,7 @@ public class ConfigFile extends AbstractConfigFile {
 
   @Override
   public void insertDefaults() {
-    clearNeedsSaving();
+    
   }
 
   @Override
