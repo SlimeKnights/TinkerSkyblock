@@ -18,6 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.io.File;
 
+import slimeknights.mantle.item.ItemBlockMeta;
 import slimeknights.mantle.network.NetworkWrapper;
 import slimeknights.skyblock.block.BlockWoodenHopper;
 import slimeknights.skyblock.config.Config;
@@ -68,7 +69,7 @@ public class TinkerSkyblock {
 
   public static final ItemRations itemRations = new ItemRations();
   public static final BlockWoodenHopper blockWoodenHopper = new BlockWoodenHopper();
-  public static final ItemBlock itemWoodenHopper = new ItemBlock(blockWoodenHopper);
+  public static final ItemBlock itemWoodenHopper = new ItemBlockMeta(blockWoodenHopper);
 
   @EventHandler
   public void preInit(FMLPreInitializationEvent event) {
@@ -99,28 +100,37 @@ public class TinkerSkyblock {
 
   @SubscribeEvent
   public static void registerBlocks(RegistryEvent.Register<Block> event) {
-    blockWoodenHopper.setRegistryName(MODID, "wooden_hopper");
-    blockWoodenHopper.setUnlocalizedName(MODID + ".wooden_hopper");
-    event.getRegistry().register(blockWoodenHopper);
+    if(Config.isWoodenHopperEnabled()) {
+      blockWoodenHopper.setRegistryName(MODID, "wooden_hopper");
+      blockWoodenHopper.setUnlocalizedName(MODID + ".wooden_hopper");
+      event.getRegistry().register(blockWoodenHopper);
+    }
   }
 
   @SubscribeEvent
   public static void registerItems(RegistryEvent.Register<Item> event) {
-    itemRations.setRegistryName(MODID, "rations");
-    itemRations.setUnlocalizedName(MODID + ".rations");
-    event.getRegistry().register(itemRations);
+    if(Config.isRationsEnabled()) {
+      itemRations.setRegistryName(MODID, "rations");
+      itemRations.setUnlocalizedName(MODID + ".rations");
+      event.getRegistry().register(itemRations);
+    }
 
-    itemWoodenHopper.setRegistryName(MODID, "wooden_hopper");
-    itemWoodenHopper.setUnlocalizedName(MODID + ".wooden_hopper");
-    event.getRegistry().register(itemWoodenHopper);
+    if(Config.isWoodenHopperEnabled()) {
+      itemWoodenHopper.setRegistryName(MODID, "wooden_hopper");
+      itemWoodenHopper.setUnlocalizedName(MODID + ".wooden_hopper");
+      event.getRegistry().register(itemWoodenHopper);
+    }
   }
-
 
   @SideOnly(Side.CLIENT)
   @SubscribeEvent
   public static void registerModels(ModelRegistryEvent modelRegistryEvent) {
-    ModelLoader.setCustomModelResourceLocation(itemRations, 0, new ModelResourceLocation(itemRations.getRegistryName(), "inventory"));
-    ModelLoader.setCustomModelResourceLocation(itemWoodenHopper, 0, new ModelResourceLocation(itemWoodenHopper.getRegistryName(), "inventory"));
+    if(Config.isRationsEnabled()) {
+      ModelLoader.setCustomModelResourceLocation(itemRations, 0, new ModelResourceLocation(itemRations.getRegistryName(), "inventory"));
+    }
+    if(Config.isWoodenHopperEnabled()) {
+      ModelLoader.setCustomModelResourceLocation(itemWoodenHopper, 0, new ModelResourceLocation(itemWoodenHopper.getRegistryName(), "inventory"));
+    }
   }
 
   @EventHandler
