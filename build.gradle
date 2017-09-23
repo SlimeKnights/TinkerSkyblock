@@ -104,3 +104,12 @@ processResources {
         exclude 'mcmod.info'
     }
 }
+
+// Add Access Transformers Manifest
+jar {
+    manifest {
+        attributes 'FMLAT': 'tinkerskyblock_at.cfg'
+    }
+
+    finalizedBy reobfJar
+}
