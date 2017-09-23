@@ -22,6 +22,7 @@ public class PlayerDataEvents {
   public static final String TAG_HAS_AXE = TinkerSkyblock.MODID + ".axe";
   public static final String TAG_HAS_SCYTHE = TinkerSkyblock.MODID + ".scythe";
   public static final String TAG_HAS_PAN = TinkerSkyblock.MODID + ".pan";
+  public static final String TAG_HAS_RATIONS = TinkerSkyblock.MODID + ".rations";
 
   @SubscribeEvent
   public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
@@ -38,6 +39,9 @@ public class PlayerDataEvents {
     }
     if(Config.INSTANCE.configFile.enablePersonalSpaceEnforcer) {
       getStackIfNeeded(player, TAG_HAS_PAN, Tools::buildFryPan);
+    }
+    if(Config.INSTANCE.configFile.enableRations) {
+      getStackIfNeeded(player, TAG_HAS_RATIONS, () -> new ItemStack(TinkerSkyblock.itemRations));
     }
   }
 
