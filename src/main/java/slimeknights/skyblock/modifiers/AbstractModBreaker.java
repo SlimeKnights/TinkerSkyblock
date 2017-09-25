@@ -24,8 +24,6 @@ public abstract class AbstractModBreaker extends ModifierTrait {
     else {
       event.setNewSpeed(0);
     }
-    event.getEntityPlayer().getFoodStats().setFoodLevel(9);
-    event.getEntityPlayer().getFoodStats().setFoodSaturationLevel(0);
   }
 
   protected abstract boolean checkCondition(IBlockState state, World entityWorld, BlockPos pos);
