@@ -16,7 +16,7 @@ import slimeknights.skyblock.TinkerSkyblock;
 import slimeknights.tconstruct.library.Util;
 
 @SideOnly(Side.CLIENT)
-@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber(Side.CLIENT)
 public class WoodenHopperGUIDrawEvent {
 
   private static final ResourceLocation HOPPER_GUI_TEXTURE = new ResourceLocation(TinkerSkyblock.MODID, "textures/gui/hopper.png");
@@ -38,6 +38,7 @@ public class WoodenHopperGUIDrawEvent {
     }
   }
 
+  @SideOnly(Side.CLIENT)
   private static class GuiWoodenHopper extends GuiHopper {
 
     public GuiWoodenHopper(InventoryPlayer playerInv, IInventory hopperInv) {
