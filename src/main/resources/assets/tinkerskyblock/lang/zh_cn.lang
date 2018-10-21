@@ -4,9 +4,6 @@ item.tinkerskyblock.rations.tooltip2=吃起来比普通食物更具效率
 item.tinkerskyblock.rations.tooltip3=使你较长时间都只需要吃一个食物
 item.tinkerskyblock.rations.tooltip4=不能用来治愈血量
 
-tile.tinkerskyblock.wooden_hopper.name=木漏斗
-item.tinkerskyblock.wooden_hopper.tooltip=更慢，但更便宜的漏斗替代品
-
 item.tinkerskyblock.pickaxe=圆石克星
 item.tinkerskyblock.scythe=树叶克星
 item.tinkerskyblock.axe=树木克星

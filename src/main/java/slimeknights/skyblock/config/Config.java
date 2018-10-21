@@ -20,8 +20,4 @@ public class Config extends AbstractConfig {
     return INSTANCE.configFile.enableRations;
   }
 
-  public static boolean isWoodenHopperEnabled() {
-    return INSTANCE.configFile.enableWoodenHopper;
-  }
-
 }

@@ -3,8 +3,6 @@ package slimeknights.skyblock;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemBlock;
-import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
@@ -14,15 +12,12 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.io.File;
 
-import slimeknights.mantle.item.ItemBlockMeta;
 import slimeknights.mantle.network.NetworkWrapper;
-import slimeknights.skyblock.block.BlockWoodenHopper;
 import slimeknights.skyblock.command.CommandGiveTools;
 import slimeknights.skyblock.config.Config;
 import slimeknights.skyblock.config.ConfigSyncPacket;
@@ -30,12 +25,9 @@ import slimeknights.skyblock.item.ItemRations;
 import slimeknights.skyblock.modifiers.ModCobbleBreaker;
 import slimeknights.skyblock.modifiers.ModLeafBreaker;
 import slimeknights.skyblock.modifiers.ModLogBreaker;
-import slimeknights.skyblock.tileentity.TileEntityWoodenHopper;
 import slimeknights.skyblock.traits.TraitSkyblock;
 import slimeknights.skyblock.traits.TraitUnbreakable;
-import slimeknights.tconstruct.debug.LocalizationCheckCommand;
 import slimeknights.tconstruct.library.TinkerRegistry;
-import slimeknights.tconstruct.library.client.MaterialRenderInfo;
 import slimeknights.tconstruct.library.materials.ExtraMaterialStats;
 import slimeknights.tconstruct.library.materials.HandleMaterialStats;
 import slimeknights.tconstruct.library.materials.HeadMaterialStats;
@@ -72,8 +64,6 @@ public class TinkerSkyblock {
   public static final ModLogBreaker MOD_LOG_BREAKER = new ModLogBreaker();
 
   public static final ItemRations itemRations = new ItemRations();
-  public static final BlockWoodenHopper blockWoodenHopper = new BlockWoodenHopper();
-  public static final ItemBlock itemWoodenHopper = new ItemBlockMeta(blockWoodenHopper);
 
   @EventHandler
   public void preInit(FMLPreInitializationEvent event) {
@@ -97,18 +87,11 @@ public class TinkerSkyblock {
     networkWrapper = new NetworkWrapper(MODID + ":sync");
     networkWrapper.registerPacketClient(ConfigSyncPacket.class);
 
-    GameRegistry.registerTileEntity(TileEntityWoodenHopper.class, MODID + ".wooden_hopper");
-
     Config.INSTANCE.save();
   }
 
   @SubscribeEvent
   public static void registerBlocks(RegistryEvent.Register<Block> event) {
-    if(Config.isWoodenHopperEnabled()) {
-      blockWoodenHopper.setRegistryName(MODID, "wooden_hopper");
-      blockWoodenHopper.setUnlocalizedName(MODID + ".wooden_hopper");
-      event.getRegistry().register(blockWoodenHopper);
-    }
   }
 
   @SubscribeEvent
@@ -118,12 +101,6 @@ public class TinkerSkyblock {
       itemRations.setUnlocalizedName(MODID + ".rations");
       event.getRegistry().register(itemRations);
     }
-
-    if(Config.isWoodenHopperEnabled()) {
-      itemWoodenHopper.setRegistryName(MODID, "wooden_hopper");
-      itemWoodenHopper.setUnlocalizedName(MODID + ".wooden_hopper");
-      event.getRegistry().register(itemWoodenHopper);
-    }
   }
 
   @SideOnly(Side.CLIENT)
@@ -131,9 +108,6 @@ public class TinkerSkyblock {
   public static void registerModels(ModelRegistryEvent modelRegistryEvent) {
     if(Config.isRationsEnabled()) {
       ModelLoader.setCustomModelResourceLocation(itemRations, 0, new ModelResourceLocation(itemRations.getRegistryName(), "inventory"));
-    }
-    if(Config.isWoodenHopperEnabled()) {
-      ModelLoader.setCustomModelResourceLocation(itemWoodenHopper, 0, new ModelResourceLocation(itemWoodenHopper.getRegistryName(), "inventory"));
     }
   }
 

@@ -26,9 +26,6 @@ public class ConfigFile extends AbstractConfigFile {
   @Setting(comment = "Gives the player a small edible item with higher food efficiency, that can be restocked with any food")
   public boolean enableRations = true;
 
-  @Setting(comment = "Adds a cheaper wooden hopper with smaller inventory and slower speed")
-  public boolean enableWoodenHopper = true;
-
   public ConfigFile() {
   }
 
