@@ -2,21 +2,12 @@ package slimeknights.skyblock.command;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
-import net.minecraft.command.CommandResultStats;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.JsonToNBT;
-import net.minecraft.nbt.NBTException;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 
-import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -32,7 +23,7 @@ public class CommandGiveTools extends CommandBase {
 
   @Override
   public int getRequiredPermissionLevel() {
-    return 2;
+    return 0;
   }
 
   @Override
@@ -48,8 +39,10 @@ public class CommandGiveTools extends CommandBase {
     }
     else
     {
+      // requires permission level 2
+      boolean overrideAlreadyGivenTags = sender.canUseCommand(2, this.getName());
       EntityPlayer entityplayer = getPlayer(server, sender, args[0]);
-      PlayerDataEvents.giveItemsToPlayer(entityplayer, true);
+      PlayerDataEvents.giveItemsToPlayer(entityplayer, overrideAlreadyGivenTags);
 
       notifyCommandListener(sender, this, "commands.give-skyblock-tools.success", entityplayer.getName());
     }
