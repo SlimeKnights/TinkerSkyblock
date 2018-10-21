@@ -4,6 +4,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
@@ -11,6 +12,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
@@ -21,6 +23,7 @@ import java.io.File;
 import slimeknights.mantle.item.ItemBlockMeta;
 import slimeknights.mantle.network.NetworkWrapper;
 import slimeknights.skyblock.block.BlockWoodenHopper;
+import slimeknights.skyblock.command.CommandGiveTools;
 import slimeknights.skyblock.config.Config;
 import slimeknights.skyblock.config.ConfigSyncPacket;
 import slimeknights.skyblock.item.ItemRations;
@@ -30,6 +33,7 @@ import slimeknights.skyblock.modifiers.ModLogBreaker;
 import slimeknights.skyblock.tileentity.TileEntityWoodenHopper;
 import slimeknights.skyblock.traits.TraitSkyblock;
 import slimeknights.skyblock.traits.TraitUnbreakable;
+import slimeknights.tconstruct.debug.LocalizationCheckCommand;
 import slimeknights.tconstruct.library.TinkerRegistry;
 import slimeknights.tconstruct.library.client.MaterialRenderInfo;
 import slimeknights.tconstruct.library.materials.ExtraMaterialStats;
@@ -139,6 +143,10 @@ public class TinkerSkyblock {
 
   @EventHandler
   public void postInit(FMLPostInitializationEvent event) {
+  }
 
+  @EventHandler
+  public void onServerStart(FMLServerStartingEvent event) {
+    event.registerServerCommand(new CommandGiveTools());
   }
 }

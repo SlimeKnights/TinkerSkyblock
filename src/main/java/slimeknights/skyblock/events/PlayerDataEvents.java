@@ -26,30 +26,32 @@ public class PlayerDataEvents {
 
   @SubscribeEvent
   public static void onPlayerLoggedIn(PlayerEvent.PlayerLoggedInEvent event) {
-    EntityPlayer player = event.player;
+    giveItemsToPlayer(event.player, false);
+  }
 
+  public static void giveItemsToPlayer(EntityPlayer player, boolean ignoreTag) {
     if(Config.INSTANCE.configFile.enableBaneOfCobble) {
-      getStackIfNeeded(player, TAG_HAS_PICK, Tools::buildCobblePick);
+      getStackIfNeeded(player, TAG_HAS_PICK, Tools::buildCobblePick, ignoreTag);
     }
     if(Config.INSTANCE.configFile.enableBaneOfLogs) {
-      getStackIfNeeded(player, TAG_HAS_AXE, Tools::buildTreeAxe);
+      getStackIfNeeded(player, TAG_HAS_AXE, Tools::buildTreeAxe, ignoreTag);
     }
     if(Config.INSTANCE.configFile.enableBaneOfLeaves) {
-      getStackIfNeeded(player, TAG_HAS_SCYTHE, Tools::buildLeafScythe);
+      getStackIfNeeded(player, TAG_HAS_SCYTHE, Tools::buildLeafScythe, ignoreTag);
     }
     if(Config.INSTANCE.configFile.enablePersonalSpaceEnforcer) {
-      getStackIfNeeded(player, TAG_HAS_PAN, Tools::buildFryPan);
+      getStackIfNeeded(player, TAG_HAS_PAN, Tools::buildFryPan, ignoreTag);
     }
     if(Config.INSTANCE.configFile.enableRations) {
-      getStackIfNeeded(player, TAG_HAS_RATIONS, () -> new ItemStack(TinkerSkyblock.itemRations));
+      getStackIfNeeded(player, TAG_HAS_RATIONS, () -> new ItemStack(TinkerSkyblock.itemRations), ignoreTag);
     }
   }
 
-  private static void getStackIfNeeded(EntityPlayer player, String tag, Supplier<ItemStack> getStack) {
+  private static void getStackIfNeeded(EntityPlayer player, String tag, Supplier<ItemStack> getStack, boolean ignoreTag) {
     NBTTagCompound playerData = player.getEntityData();
     NBTTagCompound data = TagUtil.getTagSafe(playerData, EntityPlayer.PERSISTED_NBT_TAG);
 
-    if(!data.getBoolean(tag)) {
+    if(!data.getBoolean(tag) || ignoreTag) {
       ItemHandlerHelper.giveItemToPlayer(player, getStack.get());
       data.setBoolean(tag, true);
       playerData.setTag(EntityPlayer.PERSISTED_NBT_TAG, data);
