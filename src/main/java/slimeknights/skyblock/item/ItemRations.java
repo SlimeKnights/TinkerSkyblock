@@ -2,6 +2,7 @@ package slimeknights.skyblock.item;
 
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -25,6 +26,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import slimeknights.skyblock.config.Config;
 import slimeknights.tconstruct.common.ClientProxy;
 import slimeknights.tconstruct.library.Util;
 import slimeknights.tconstruct.library.client.CustomFontColor;
@@ -44,6 +46,13 @@ public class ItemRations extends ItemFood implements IRepairable {
     this.setMaxDamage(50);
     this.setMaxStackSize(1);
     this.setNoRepair();
+  }
+
+  @Override
+  public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+    if(Config.INSTANCE.configFile.enableRations) {
+      super.getSubItems(tab, items);
+    }
   }
 
   @Override

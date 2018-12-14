@@ -16,8 +16,4 @@ public class Config extends AbstractConfig {
     configFile = this.load(new ConfigFile(file), ConfigFile.class);
   }
 
-  public static boolean isRationsEnabled() {
-    return INSTANCE.configFile.enableRations;
-  }
-
 }

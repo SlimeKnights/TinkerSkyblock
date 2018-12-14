@@ -42,7 +42,7 @@ import static slimeknights.tconstruct.library.utils.HarvestLevels.STONE;
     name = "Tinkers' Skyblock",
     dependencies = "required-after:forge@[14.21.0,);"
                    + "required-after:mantle@[1.12-1.3.1,);"
-                   + "required-after:tconstruct@[1.12-2.7.3.+,)",
+                   + "required-after:tconstruct@[1.12.2-2.11.0.+,)",
     acceptedMinecraftVersions = "[1.12, 1.13)"
 )
 @Mod.EventBusSubscriber
@@ -96,19 +96,15 @@ public class TinkerSkyblock {
 
   @SubscribeEvent
   public static void registerItems(RegistryEvent.Register<Item> event) {
-    if(Config.isRationsEnabled()) {
-      itemRations.setRegistryName(MODID, "rations");
-      itemRations.setUnlocalizedName(MODID + ".rations");
-      event.getRegistry().register(itemRations);
-    }
+    itemRations.setRegistryName(MODID, "rations");
+    itemRations.setUnlocalizedName(MODID + ".rations");
+    event.getRegistry().register(itemRations);
   }
 
   @SideOnly(Side.CLIENT)
   @SubscribeEvent
   public static void registerModels(ModelRegistryEvent modelRegistryEvent) {
-    if(Config.isRationsEnabled()) {
-      ModelLoader.setCustomModelResourceLocation(itemRations, 0, new ModelResourceLocation(itemRations.getRegistryName(), "inventory"));
-    }
+    ModelLoader.setCustomModelResourceLocation(itemRations, 0, new ModelResourceLocation(itemRations.getRegistryName(), "inventory"));
   }
 
   @EventHandler
