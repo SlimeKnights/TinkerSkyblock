@@ -1,4 +1,4 @@
-#[ Tinkers' Skyblock](https://www.curseforge.com/minecraft/mc-mods/tinkers-skyblock)
+# [Tinkers' Skyblock](https://www.curseforge.com/minecraft/mc-mods/tinkers-skyblock)
 
 This small mod adds several items, aimed at reducing the earlygame downtime in skyblock maps. Because honestly, nobody likes sitting there mining cobble for half an hour, or trying to gather enough wood, while hoping not to starve because you didn't get any apple drops.
 
